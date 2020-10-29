@@ -18,13 +18,13 @@ When the user loads the page, they are given the option to create a new workout 
 
 The user can:
 
-  * Add exercises to a previous workout plan.
+- Add exercises to a previous workout plan.
 
-  * Add new exercises to a new workout plan.
+- Add new exercises to a new workout plan.
 
-  * View the combined weight of multiple exercises on the `stats` page.
+- View the combined weight of multiple exercises on the `stats` page.
 
 ## Deployment & Repository
 
-- Heroku: 
+- Heroku: https://fitness-tracker-5678.herokuapp.com/
 - GitHub: https://github.com/bridgetrshannon/Fitness_Tracker
