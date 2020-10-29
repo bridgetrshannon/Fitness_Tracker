@@ -1,0 +1,5 @@
+Mongoose docs:
+https://mongoosejs.com/docs/guide.html 
+
+MongoDB Brad Traversy video:
+https://www.youtube.com/watch?v=-56x56UppqQ

@@ -1,3 +1,5 @@
+// need to build this file
+
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -19,8 +21,11 @@ mongoose.connect(
 );
 
 // routes
-app.use(require("./routes/api.js"));
+app.use(require("./routes/api.js")); 
+//  TypeError: app.use() requires a middleware function
+
 app.use(require("./routes/view.js"));
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
+
