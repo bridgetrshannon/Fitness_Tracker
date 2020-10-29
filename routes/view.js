@@ -1,12 +1,14 @@
-// need to build this file
 // Serve up HTML files here
+const router = require("express").Router();
 
-// const router = require("express").Router();
-// const Workout = require("../models/workout")
+// displays exercise page
+router.get("/exercise", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/exercise.html"));
+  });
 
+// displays stats page   
+  router.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/stats.html"));
+  });
 
-// router.post("/api/workouts", (req, res) => {
-//     Workout.create({})
-// })
-
-// module.exports = router;
+  module.exports = router;

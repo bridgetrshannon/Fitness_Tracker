@@ -1,1 +1,4 @@
-// need to build this file
+// require workout model
+module.exports = {
+    Workout: require('./workout')
+  };
