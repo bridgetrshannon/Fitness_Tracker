@@ -6,11 +6,11 @@ An application that creates and tracks daily workouts. Users can log multiple ex
 
 ## Languages
 
-<img float="left" alt="JavaScript badge" src="https://img.shields.io/badge/JavaScript-53%25-yellow">
+<img float="left" alt="JavaScript badge" src="https://img.shields.io/badge/JavaScript-59%25-yellow">
 
-<img float="left" alt="CSS badge" src="https://img.shields.io/badge/CSS-25%25-blueviolet">
+<img float="left" alt="CSS badge" src="https://img.shields.io/badge/CSS-22%25-blueviolet">
 
-<img float="left" alt="HTML badge" src="https://img.shields.io/badge/HTML-22%25-orange">
+<img float="left" alt="HTML badge" src="https://img.shields.io/badge/HTML-19%25-orange">
 
 ## Features
 
