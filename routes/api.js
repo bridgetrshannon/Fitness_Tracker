@@ -1,53 +1,46 @@
 // need to build this file
 const router = require("express").Router();
 const Workout = require("../models/workout")
+const db = require("./models/")
 
 
 router.get("/api/workouts", (req, res) => {
     console.log("getting workouts route")
-    Workout.find({})
+    db.Workout.find({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
 })
 
 router.post("/api/workouts", (req, res) => {
     console.log("posting workouts route")
-    Workout.create({})
-})
+    db.Workout.create({})
+    .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { workouts: _id } }, { new: true }))
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
-router.get("/api/exercise", (req, res) => {
-    console.log("getting exercise route")
-    Exercise.find({})
-})
-
-router.post("/api/exercise", (req, res) => {
-    console.log("posting exercise route")
-    Exercise.create({})
-})
-
-// add workout
-// router.post("/api/exercise", ({ body }, res) => {
-//     Workout.create(body)
-//       .then(dbWorkout => {
-//         res.json(dbWorkout);
-//       })
-//       .catch(err => {
-//         res.status(400).json(err);
+// router.put("/api/workouts/:id", (req, res) => {
+//     console.log(req.body);
+//     db.Workout.insert(req.body, (error, data) => {
+//         if (error) {
+//           res.send(error);
+//         } else {
+//           res.send(data);
+//         }
 //       });
-//   });
-//   createWorkout();
-  
-// //   finds / displays workouts
-//   router.get("/api/workouts", (req, res) => {
-//     Workout.find({})
-//       .sort({ date: -1 })
-//       .then(dbWorkout => {
-//         res.json(dbWorkout);
-//       })
-//       .catch(err => {
-//         res.status(400).json(err);
-//       });
-//   });
+// })
 
-//   function for displaying last workout 
-//   getLastWorkout();
-  
+// router.put("/api/workouts", (req, res) => {
+//     console.log("update workouts route")
+//     db.Workout.update({})
+// })
+
 module.exports = router;
