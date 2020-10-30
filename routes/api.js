@@ -1,7 +1,7 @@
 // need to build this file
 const router = require("express").Router();
 const Workout = require("../models/workout")
-const db = require("./models/")
+const db = require("../models/")
 
 
 router.get("/api/workouts", (req, res) => {
@@ -27,16 +27,16 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-// router.put("/api/workouts/:id", (req, res) => {
-//     console.log(req.body);
-//     db.Workout.insert(req.body, (error, data) => {
-//         if (error) {
-//           res.send(error);
-//         } else {
-//           res.send(data);
-//         }
-//       });
-// })
+router.put("/api/workouts/:id", (req, res) => {
+    console.log(req.body);
+    db.Workout.insert(req.body, (err, saved) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(saved);
+        }
+      });
+})
 
 // router.put("/api/workouts", (req, res) => {
 //     console.log("update workouts route")
