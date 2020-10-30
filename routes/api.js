@@ -6,7 +6,7 @@ const mongojs = require("mongojs");
 
 
 router.get("/api/workouts", (req, res) => {
-    db.Workout.find({})
+    Workout.find({})
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -16,7 +16,7 @@ router.get("/api/workouts", (req, res) => {
 })
 
 router.post("/api/workouts", (req, res) => {
-    db.Workout.create({})
+    Workout.create({})
     .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { workouts: _id } }, { new: true }))
     .then(dbWorkout => {
       res.json(dbWorkout);
@@ -26,31 +26,49 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
+
 router.put("/api/workouts/:id", ({ body, params }, res) => {
-    db.Workout.updateOne(
+    Workout.findByIdAndUpdate(
       {
-        _id: mongojs.ObjectId(params.id)
-      },
-      {
-        $set: {
+        $push: {
             exercises: body
         }
       },
-  
-      (error, edited) => {
-        if (error) {
-          console.log(error);
-          res.send(error);
-        } else {
-          console.log(edited);
-          res.send(edited);
-        }
-      }
-    );
+      { new: true, runValidators: true }
+    )
+    .then(dbWorkout => {
+        res.json(dbWorkout);
+    })
+    .catch(err => {
+        res.json(err);
+    });
   });
 
+// router.put("/api/workouts/:id", ({ body, params }, res) => {
+//     Workout.updateOne(
+//       {
+//         _id: mongojs.ObjectId(params.id)
+//       },
+//       {
+//         $set: {
+//             exercises: body
+//         }
+//       },
+  
+//       (error, edited) => {
+//         if (error) {
+//           console.log(error);
+//           res.send(error);
+//         } else {
+//           console.log(edited);
+//           res.send(edited);
+//         }
+//       }
+//     );
+//   });
+
   router.get("/api/workouts/range", (req, res) => {
-    db.Workout.find({})
+    Workout.find({})
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
