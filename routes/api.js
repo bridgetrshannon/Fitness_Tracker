@@ -2,6 +2,7 @@
 const router = require("express").Router();
 const Workout = require("../models/workout")
 
+
 router.get("/api/workouts", (req, res) => {
     console.log("getting workouts route")
     Workout.find({})
@@ -10,6 +11,16 @@ router.get("/api/workouts", (req, res) => {
 router.post("/api/workouts", (req, res) => {
     console.log("posting workouts route")
     Workout.create({})
+})
+
+router.get("/api/exercise", (req, res) => {
+    console.log("getting exercise route")
+    Exercise.find({})
+})
+
+router.post("/api/exercise", (req, res) => {
+    console.log("posting exercise route")
+    Exercise.create({})
 })
 
 // add workout
