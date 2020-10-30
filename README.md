@@ -15,14 +15,18 @@ An application that creates and tracks daily workouts. Users can log multiple ex
 ## Features
 
 When the user loads the page, they are given the option to create a new workout or continue with their last workout.
+<img alt="no workout" src="./public/assets/noworkout.png" height="250px" width="600px">
 
 The user can:
 
-- Add exercises to a previous workout plan.
-
 - Add new exercises to a new workout plan.
+  ![adding one workout](./public/assets/oneworkout.gif)
+
+- Add exercises to a previous workout plan.
+  ![adding additional workouts](./public/assets/multiworkout.gif)
 
 - View the combined weight of multiple exercises on the `stats` page.
+  ![workout stats](./public/assets/stats.png)
 
 ## Deployment & Repository
 
