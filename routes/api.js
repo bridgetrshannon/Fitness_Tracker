@@ -1,12 +1,10 @@
 // need to build this file
 const router = require("express").Router();
-const Workout = require("../models/workout")
+// const Workout = require("../models/workout")
 const db = require("../models/")
-const mongojs = require("mongojs");
-
 
 router.get("/api/workouts", (req, res) => {
-    Workout.find({})
+    db.Workout.find({})
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -16,7 +14,7 @@ router.get("/api/workouts", (req, res) => {
 })
 
 router.post("/api/workouts", (req, res) => {
-    Workout.create({})
+    db.Workout.create({})
     .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { workouts: _id } }, { new: true }))
     .then(dbWorkout => {
       res.json(dbWorkout);
@@ -26,9 +24,9 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-
 router.put("/api/workouts/:id", ({ body, params }, res) => {
-    Workout.findByIdAndUpdate(
+    db.Workout.findByIdAndUpdate(
+        params.id,
       {
         $push: {
             exercises: body
@@ -42,39 +40,27 @@ router.put("/api/workouts/:id", ({ body, params }, res) => {
     .catch(err => {
         res.json(err);
     });
-  });
+});
 
-// router.put("/api/workouts/:id", ({ body, params }, res) => {
-//     Workout.updateOne(
-//       {
-//         _id: mongojs.ObjectId(params.id)
-//       },
-//       {
-//         $set: {
-//             exercises: body
-//         }
-//       },
-  
-//       (error, edited) => {
-//         if (error) {
-//           console.log(error);
-//           res.send(error);
-//         } else {
-//           console.log(edited);
-//           res.send(edited);
-//         }
-//       }
-//     );
-//   });
+router.get("/api/workouts/range", (req, res) => {
+    db.Workout.find({})
+    .then(dbWorkout => {
+        console.log(dbWorkout);
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
 
-  router.get("/api/workouts/range", (req, res) => {
-    Workout.find({})
+router.delete("/api/workouts", ({ body }, res) => {
+   db.Workout.findByIdAndDelete(body.id)
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
     .catch(err => {
       res.json(err);
-    });
-})
+    })
+});
 
 module.exports = router;
