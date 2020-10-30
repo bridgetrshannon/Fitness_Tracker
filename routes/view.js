@@ -1,6 +1,6 @@
 // Serve up HTML files here
 const router = require("express").Router();
-const path = require('path');
+const path = require("path");
 
 // displays exercise page
 router.get("/exercise", (req, res) => {

@@ -2,10 +2,10 @@
 const router = require("express").Router();
 const Workout = require("../models/workout")
 const db = require("../models/")
+const mongojs = require("mongojs");
 
 
 router.get("/api/workouts", (req, res) => {
-    console.log("getting workouts route")
     db.Workout.find({})
     .then(dbWorkout => {
       res.json(dbWorkout);
@@ -16,7 +16,6 @@ router.get("/api/workouts", (req, res) => {
 })
 
 router.post("/api/workouts", (req, res) => {
-    console.log("posting workouts route")
     db.Workout.create({})
     .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { workouts: _id } }, { new: true }))
     .then(dbWorkout => {
@@ -27,20 +26,37 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-router.put("/api/workouts/:id", (req, res) => {
-    console.log(req.body);
-    db.Workout.insert(req.body, (err, saved) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.send(saved);
+router.put("/api/workouts/:id", ({ body, params }, res) => {
+    db.Workout.updateOne(
+      {
+        _id: mongojs.ObjectId(params.id)
+      },
+      {
+        $set: {
+            exercises: body
         }
-      });
-})
+      },
+  
+      (error, edited) => {
+        if (error) {
+          console.log(error);
+          res.send(error);
+        } else {
+          console.log(edited);
+          res.send(edited);
+        }
+      }
+    );
+  });
 
-// router.put("/api/workouts", (req, res) => {
-//     console.log("update workouts route")
-//     db.Workout.update({})
-// })
+  router.get("/api/workouts/range", (req, res) => {
+    db.Workout.find({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+})
 
 module.exports = router;
